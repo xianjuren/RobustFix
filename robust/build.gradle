@@ -1,0 +1,36 @@
+plugins {
+    id 'groovy'
+    id 'maven'
+}
+
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+    implementation 'com.android.tools.build:gradle:4.1.3'
+    implementation 'org.javassist:javassist:3.20.0-GA'
+}
+
+repositories {
+    jcenter()
+}
+
+//对外输出构建的命令
+uploadArchives {
+
+    //仓库
+    repositories.mavenDeployer{
+        //对外输出给jar包
+        repository(url: uri('../repo')) //输出到当前根目录下repo
+        pom.groupId = 'com.example.robust'  //groupId,自定义 精度
+        pom.artifactId = 'modify'  //artifactId ,自定义 维度
+        pom.version = '1.0.1'  //version 版本号
+        //jar包输出到那个文件夹下
+    }
+
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_7
+    targetCompatibility = JavaVersion.VERSION_1_7
+}
